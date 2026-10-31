@@ -1,4 +1,5 @@
 import type { Blueprint, ScopeInput } from "./blueprint";
+import { BUDGETS, TIMELINES } from "./catalog";
 
 export type Priority = "hot" | "warm" | "cold";
 
@@ -31,7 +32,10 @@ export function scoreLead(
 ): LeadScore {
   const reasons: string[] = [];
   let score = BUDGET_POINTS[scope.budget] + TIMELINE_POINTS[scope.timeline];
-  reasons.push(`Budget band ${scope.budget}`, `Timeline ${scope.timeline}`);
+  reasons.push(
+    `Budget ${BUDGETS.find((b) => b.id === scope.budget)?.label}`,
+    `Launch ${TIMELINES.find((t) => t.id === scope.timeline)?.label}`,
+  );
 
   score += blueprint.tier.level * 10;
   if (blueprint.tier.level > 0) reasons.push(`${blueprint.tier.label}-tier scope`);

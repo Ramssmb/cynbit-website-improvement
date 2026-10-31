@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
+/* Palette and type taken from cynbit.in so the prototype drops into the live site. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7fafa;
+  --surface: #ffffff;
+  --foreground: #181c1d;
+  --muted: #5b6667;
+  --line: #dfe7e7;
+  --brand: #006067;
+  --brand-soft: #e3f1f1;
+  --ok: #1d7a46;
+  --warn: #a35d00;
+  --risk: #b42318;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-risk: var(--risk);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-jakarta);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
 }
