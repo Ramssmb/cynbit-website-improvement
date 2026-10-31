@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cynbit Project Blueprint Builder
 
-## Getting Started
+A working prototype that replaces the static "Start discovery" inquiry forms on [cynbit.in](https://www.cynbit.in) with a guided scoping wizard. Visitors get an **instant indicative blueprint**: phases on Cynbit's six-stage lifecycle, a timeline, a stack, and a budget/timeline fit check. Cynbit gets a **structured, priority-scored lead**.
 
-First, run the development server:
+> Unofficial prototype built for the Cynbit Technologies Full Stack Developer Intern task. Not affiliated with or operated by Cynbit.
 
+- **Live demo:** _&lt;deployed URL&gt;_ (try `/?service=cloud` for a deep link)
+- **Technical report:** [docs/TECHNICAL_REPORT.md](docs/TECHNICAL_REPORT.md)
+
+![Live blueprint preview](docs/screenshots/desktop-live-preview.jpg)
+
+## Features
+- Four-step wizard (Service → Scope → Constraints → Contact) with a live blueprint panel
+- Honest fit check for timeline and budget, with MVP-first recommendations
+- Deep links per service (`?service=ai-automation|software|cloud|marketing`)
+- Server-side validation (Zod), recomputed blueprint and lead score, rate limiting, honeypot
+- Printable / save-as-PDF blueprint on the confirmation page
+- `/admin` sales inbox ranked hot / warm / cold behind a bearer token
+- Accessible: real radio/checkbox inputs, fieldsets, live region, inline errors, focus management
+
+## Stack
+Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Zod · Vitest
+
+## Run locally
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # set ADMIN_TOKEN to a long random string
+npm run dev                  # http://localhost:3000 — admin at /admin
+npm test                     # 23 unit + API tests
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment
+| Variable | Purpose |
+|---|---|
+| `ADMIN_TOKEN` | Required for `GET /api/inquiries` and `/admin` |
+| `WEBHOOK_URL` | Optional: forwards each lead as JSON (CRM, Slack, Zapier) |
+| `DATA_DIR` | Optional: location of `leads.jsonl` (defaults to `.data/`, or the OS temp dir on Vercel) |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy (Vercel)
+Import the repo in Vercel, set `ADMIN_TOKEN` (and optionally `WEBHOOK_URL`), and deploy. No other configuration is needed. File storage on serverless hosts is ephemeral, so use `WEBHOOK_URL` or swap `src/lib/store.ts` for a database in production.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project layout
+```
+src/lib/catalog.ts        services, modules, effort ranges, lifecycle
+src/lib/blueprint.ts      estimation engine (shared by client and server)
+src/lib/lead.ts           lead scoring
+src/lib/schema.ts         Zod request schemas
+src/lib/store.ts          JSONL store + webhook
+src/app/api/inquiries/    POST submit, GET admin list
+src/components/           BlueprintWizard, BlueprintPreview
+src/app/admin/            sales inbox
+```
