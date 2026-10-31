@@ -1,5 +1,8 @@
 # Cynbit Project Blueprint Builder
 
+[![CI](https://github.com/Ramssmb/cynbit-website-improvement/actions/workflows/ci.yml/badge.svg)](https://github.com/Ramssmb/cynbit-website-improvement/actions/workflows/ci.yml)
+![Next.js 15](https://img.shields.io/badge/Next.js-15-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6) ![Tests](https://img.shields.io/badge/tests-23%20passing-1d7a46)
+
 A working prototype that replaces the static "Start discovery" inquiry forms on [cynbit.in](https://www.cynbit.in) with a guided scoping wizard. Visitors get an **instant indicative blueprint**: phases on Cynbit's six-stage lifecycle, a timeline, a stack, and a budget/timeline fit check. Cynbit gets a **structured, priority-scored lead**.
 
 > Unofficial prototype built for the Cynbit Technologies Full Stack Developer Intern task. Not affiliated with or operated by Cynbit.
@@ -16,6 +19,7 @@ A working prototype that replaces the static "Start discovery" inquiry forms on 
 - Server-side validation (Zod), recomputed blueprint and lead score, rate limiting, honeypot
 - Printable / save-as-PDF blueprint on the confirmation page
 - `/admin` sales inbox ranked hot / warm / cold behind a bearer token
+- Polished shell: branded favicon, social-share preview image, "why this prototype" comparison, custom 404
 - Accessible: real radio/checkbox inputs, fieldsets, live region, inline errors, focus management
 
 ## Stack

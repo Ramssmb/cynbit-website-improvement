@@ -1,7 +1,7 @@
 # Technical Report — Project Blueprint Builder for cynbit.in
 
 **Author:** Maloth Bhavsingh · **Role applied for:** Full Stack Developer Intern · **Date:** 31 October 2026
-**Live prototype:** _&lt;deployed URL&gt;_ · **Repository:** _&lt;GitHub URL&gt;_
+**Live prototype:** _&lt;deployed URL&gt;_ · **Repository:** https://github.com/Ramssmb/cynbit-website-improvement
 
 ---
 
@@ -125,7 +125,7 @@ Browser                                         Server (Next.js route handler)
 |---|---|
 | Unit and API tests (`npm test`) | **23 passing**: engine, fit logic, scoring, schema, POST/GET, validation, rate limit, auth |
 | Type-check / lint / production build | Clean |
-| Home route first-load JS | **109 kB** (102 kB is the shared Next.js runtime) |
+| Home route first-load JS | **113 kB** (102 kB is the shared Next.js runtime) |
 | End-to-end in the browser | Deep link → modules → constraints → invalid email (inline server error) → valid submit → reference ID → lead visible via admin API, scored *hot / 70* |
 | Mobile (375 px) | No horizontal overflow; sticky estimate bar |
 
